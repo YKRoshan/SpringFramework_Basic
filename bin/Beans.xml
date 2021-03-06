@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- To fetch the values from employee-info you need to add following line -->
+	<context:property-placeholder
+		location="classpath:employee-info" />
+
+	<!-- com.Ex0_HelloWorld package -->
+	<bean id="helloWorld" class="com.Ex0_helloWorld.HelloWorld">
+		<property name="message" value="Hello World!" />
+	</bean>
+
+
+	<!-- com.Ex1_DIByConstructor Package -->
+	<bean id="emp" class="com.Ex1_DIByConstructor.Employee">
+		<constructor-arg value="20" type="int"></constructor-arg>
+	</bean>
+
+
+	<!-- com.Ex2_DIWithDependentObjectAndSetter Package -->
+	<bean id="add"
+		class="com.Ex2_DIWithDependentObjectAndSetter.Address">
+		<!-- To fetch the values from employee-info you need to change the xmlns 
+			configuration -->
+		<property name="address" value="${employee.address}"></property>
+	</bean>
+	<bean id="emp1"
+		class="com.Ex2_DIWithDependentObjectAndSetter.Employee">
+		<property name="address">
+			<ref bean="add" />
+		</property>
+		<property name="age" value="21"></property>
+	</bean>
+
+
+
+
+</beans>
